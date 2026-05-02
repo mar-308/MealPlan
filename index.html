@@ -21,7 +21,7 @@ body {
 .header h1 {
   font-family: 'Cinzel', serif;
   font-size: 22px; font-weight: 700;
-  color: #E8C060;
+  color: #8c6a1b;
   margin-bottom: 5px; letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -55,7 +55,7 @@ body {
 .f-badge {
   font-family: 'Cinzel', serif;
   font-size: 10px; font-weight: 600;
-  background: rgba(232,192,96,0.15);
+  background: rgba(138, 130, 111, 0.15);
   color: #E8C060;
   border: 1px solid #8B6018;
   padding: 4px 11px;
@@ -69,7 +69,7 @@ body {
   font-size: 17px; font-weight: 600;
   color: #E8C060; margin-bottom: 4px; letter-spacing: 0.03em;
 }
-.featured-meal-note { font-size: 13px; color: #7a5e30; margin-bottom: 14px; font-style: italic; }
+.featured-meal-note { font-size: 13px; color: #9d6d48; margin-bottom: 14px; font-style: italic; }
 .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #B8860B; font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .t-icon { width: 22px; height: 22px; border-radius: 2px; background: rgba(184,134,11,0.12); border: 1px solid #5C3D1E; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
 .t-icon svg { width: 10px; height: 10px; stroke: #B8860B; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
@@ -79,22 +79,22 @@ body {
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 10px; }
 .day-card {
-  background: #f5f0e8;
+  background: #1a0f05;
   border-radius: 4px; overflow: hidden;
-  border: 1px solid #d4c4a8;
+  border: 1px solid #785c2f;
   cursor: pointer; transition: border-color 0.15s;
 }
 .day-card:hover { border-color: #b8a07a; }
-.day-card-head { background: #e8d9c0; border-bottom: 1px solid #d4c4a8; padding: 12px 15px; }
-.day-card-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; color: #5c1010; letter-spacing: 0.07em; text-transform: uppercase; }
+.day-card-head { background: #621313; border-bottom: 1px solid #785c2f; padding: 12px 15px; }
+.day-card-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; color: #E8C060; letter-spacing: 0.07em; text-transform: uppercase; }
 .day-card-date { font-size: 11px; color: #8B6040; margin-top: 2px; font-style: italic; }
-.d-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: #5c1010; color: #E8C060; border: 1px solid #8B1515; padding: 2px 7px; border-radius: 2px; margin-top: 5px; }
+.d-badge { display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: #5c1010; color: #E8C060; border: 1px solid #826a31; padding: 2px 7px; border-radius: 2px; margin-top: 5px; }
 .day-body { padding: 13px 15px 13px; }
-.day-meal-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; color: #2a1208; margin-bottom: 3px; line-height: 1.4; }
-.day-meal-note { font-size: 11px; color: #8B6040; margin-bottom: 12px; font-style: italic; }
-.d-toggle-row { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #5c1010; font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-.dt-icon { width: 20px; height: 20px; border-radius: 2px; background: rgba(92,16,16,0.08); border: 1px solid #c4a882; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
-.dt-icon svg { width: 9px; height: 9px; stroke: #5c1010; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+.day-meal-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; color: #ac8939; margin-bottom: 3px; line-height: 1.4; }
+.day-meal-note { font-size: 11px; color: #9d6d48; margin-bottom: 12px; font-style: italic; }
+.d-toggle-row { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #B8860B; font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.dt-icon { width: 20px; height: 20px; border-radius: 2px; background: rgba(92,16,16,0.08); border: 1px solid #5C3D1E; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+.dt-icon svg { width: 9px; height: 9px; stroke: #B8860B; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
 .open .dt-icon { background: #5c1010; border-color: #8B1515; }
 .open .dt-icon svg { stroke: #E8C060; transform: rotate(180deg); }
 .open .d-toggle-row span { color: #b8a07a; }
@@ -102,19 +102,19 @@ body {
 .recipe-drawer { max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
 .open .recipe-drawer { max-height: 800px; }
 .recipe-inner { border-top: 1px solid #2a1a08; padding: 16px 22px 20px; }
-.day-card .recipe-inner { border-top: 1px solid #d4c4a8; padding: 13px 15px 16px; }
+.day-card .recipe-inner { border-top: 1px solid #785c2f; padding: 13px 15px 16px; }
 .rsec { margin-bottom: 16px; }
 .rsec:last-child { margin-bottom: 0; }
 .rsec-label {
   font-family: 'Cinzel', serif;
   font-size: 9px; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: #5C3D1E; margin-bottom: 9px;
+  color: #8B6040; margin-bottom: 9px;
 }
 .day-card .rsec-label { color: #8B6040; }
 .ing-list { list-style: none; }
 .ing-list li { font-size: 14px; color: #A07828; padding: 3px 0 3px 15px; position: relative; line-height: 1.5; }
-.day-card .ing-list li { color: #4a3010; }
+.day-card .ing-list li { color: #A07828; }
 .ing-list li::before { content: ''; position: absolute; left: 0; top: 10px; width: 5px; height: 1px; background: #5C3D1E; }
 .day-card .ing-list li::before { background: #c4a882; }
 .steps-list { list-style: none; counter-reset: step; }
@@ -124,7 +124,7 @@ body {
   counter-increment: step;
   border-bottom: 1px solid #1e1208;
 }
-.day-card .steps-list li { color: #3a2010; border-bottom: 1px solid #e0d0b8; }
+.day-card .steps-list li { color: #A07828; border-bottom: 1px solid #785c2f; }
 .steps-list li:last-child { border-bottom: none; padding-bottom: 0; }
 .day-card .steps-list li:last-child { border-bottom: none; }
 .steps-list li::before {
@@ -148,7 +148,7 @@ body {
 </div>
 
 <div id="root"></div>
-<div class="footer">Lunch is the most important meal of the day</div>
+<div class="footer">Obrigada! Love you, Ventu ♡ </div>
 
 <script>
 var DAYS = [
