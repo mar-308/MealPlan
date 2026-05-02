@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunch Plan</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f3ef;
+  color: #1a1a1a;
+  padding: 24px 18px 48px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.header { margin-bottom: 22px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #111; margin-bottom: 4px; letter-spacing: -0.3px; }
+.header p { font-size: 13px; color: #999; }
+
+.featured-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.featured-card:hover { background: #fdfcfa; }
+.featured-header {
+  background: #1D9E75;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.featured-day-name { font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.4px; }
+.featured-day-date { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+.f-badge {
+  font-size: 11px; font-weight: 700;
+  background: rgba(255,255,255,0.22);
+  color: white; padding: 5px 12px;
+  border-radius: 20px; white-space: nowrap; margin-top: 2px;
+}
+.featured-body { padding: 20px 24px 18px; }
+.featured-meal-name { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 4px; letter-spacing: -0.2px; }
+.featured-meal-note { font-size: 13px; color: #bbb; margin-bottom: 14px; }
+.toggle-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #0F6E56; font-weight: 600; }
+.t-icon { width: 22px; height: 22px; border-radius: 50%; background: #E1F5EE; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+.t-icon svg { width: 10px; height: 10px; stroke: #0F6E56; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+.open .t-icon { background: #1D9E75; }
+.open .t-icon svg { stroke: white; transform: rotate(180deg); }
+.open .toggle-row span { color: #999; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 10px; }
+.day-card {
+  background: white; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06); cursor: pointer; transition: background 0.1s;
+}
+.day-card:hover { background: #fdfcfa; }
+.day-card-head { background: #9FE1CB; padding: 13px 16px; }
+.day-card-name { font-size: 14px; font-weight: 700; color: #085041; }
+.day-card-date { font-size: 11px; color: #0F6E56; margin-top: 1px; }
+.d-badge { display: inline-block; font-size: 10px; font-weight: 700; background: #085041; color: white; padding: 2px 8px; border-radius: 10px; margin-top: 5px; }
+.day-body { padding: 14px 16px 14px; }
+.day-meal-name { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 3px; line-height: 1.3; }
+.day-meal-note { font-size: 11px; color: #bbb; margin-bottom: 12px; }
+.d-toggle-row { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #0F6E56; font-weight: 600; }
+.dt-icon { width: 20px; height: 20px; border-radius: 50%; background: #E1F5EE; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+.dt-icon svg { width: 9px; height: 9px; stroke: #0F6E56; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+.open .dt-icon { background: #1D9E75; }
+.open .dt-icon svg { stroke: white; transform: rotate(180deg); }
+.open .d-toggle-row span { color: #999; }
+
+.recipe-drawer { max-height: 0; overflow: hidden; transition: max-height 0.32s ease; }
+.open .recipe-drawer { max-height: 700px; }
+.recipe-inner { border-top: 1px solid #f0ede6; padding: 18px 24px 22px; }
+.day-card .recipe-inner { padding: 14px 16px 18px; }
+.rsec { margin-bottom: 16px; }
+.rsec:last-child { margin-bottom: 0; }
+.rsec-label { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #ccc; margin-bottom: 8px; }
+.ing-list { list-style: none; }
+.ing-list li { font-size: 13px; color: #555; padding: 3px 0 3px 14px; position: relative; line-height: 1.45; }
+.ing-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 4px; height: 4px; border-radius: 50%; background: #9FE1CB; }
+.steps-list { list-style: none; counter-reset: step; }
+.steps-list li {
+  font-size: 13px; color: #444; line-height: 1.55;
+  padding: 7px 0 7px 32px; position: relative;
+  counter-increment: step;
+  border-bottom: 1px solid #f5f2ec;
+}
+.steps-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.steps-list li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 8px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #E1F5EE; color: #0F6E56;
+  font-size: 10px; font-weight: 800;
+  text-align: center; line-height: 20px;
+}
+.footer { margin-top: 18px; text-align: center; font-size: 12px; color: #ccc; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Lunch this week</h1>
+  <p id="sub">May 2 – 5 · Tap to see the recipe</p>
+</div>
+
+<div id="root"></div>
+<div class="footer">Lunch is the most important meal of the day</div>
+
+<script>
+var DAYS = [
+  {
+    key: 2, label: 'Saturday', date: 'May 2',
+    name: 'Sautéed Steak & Vegetables',
+    note: 'Lomo saltado style · air fryer',
+    ing: ['180g de bistec de falda', '1 cebolla, en rodajas', '1 tomate', 'Ajo en polvo', 'Coconut aminos o salsa de soya'],
+    steps: [
+      'Corta el bistec en tiras y sazónalo con ajo en polvo y coconut aminos. Deja marinar 15 minutos.',
+      'Precalienta la freidora de aire a 200°C (400°F).',
+      'Cocina el bistec 6–8 minutos, agitando a la mitad.',
+      'Agrega la cebolla en rodajas y el tomate picado. Cocina 3–4 minutos más.',
+      'Mezcla todo y sirve de inmediato.'
+    ]
+  },
+  {
+    key: 3, label: 'Sunday', date: 'May 3',
+    name: 'Crispy Chicken with Mushrooms & Potatoes',
+    note: 'Oat-crusted · air fryer',
+    ing: ['1 pechuga de pollo', '1 huevo batido', 'Avena (para empanizar)', 'Ajo en polvo', 'Champiñones', '3/4 taza de papas en trozos', 'Romero', 'Aceite de oliva en spray'],
+    steps: [
+      'Mezcla la avena con ajo en polvo, sal y pimienta en un plato.',
+      'Pasa la pechuga por el huevo batido y luego cúbrela bien con la mezcla de avena.',
+      'Cocina en freidora de aire a 190°C (375°F) por 12–15 minutos, voltea a la mitad. La temperatura interna debe llegar a 74°C.',
+      'En otra tanda, coloca los champiñones y las papas con aceite de oliva en spray y romero. Cocina 15 minutos a 190°C.',
+      'Sirve el pollo junto a los champiñones y las papas.'
+    ]
+  },
+  {
+    key: 4, label: 'Monday', date: 'May 4',
+    name: 'Instant Pot Beef Stew',
+    note: 'Flank steak + potatoes · 30 min pressure',
+    ing: ['Bistec de falda en cubos grandes', '1 cebolla en rodajas gruesas', '1 tomate pelado y picado', 'Papas en trozos', 'Pimentón en polvo', 'Sal y pimienta', '2 tazas de agua'],
+    steps: [
+      'Corta el bistec en cubos grandes y sazónalo con pimentón, sal y pimienta.',
+      'Coloca en el Instant Pot en capas: primero la cebolla, luego el tomate picado sin piel ni semillas, después la carne y las papas al final.',
+      'Agrega 2 tazas de agua. No revuelvas.',
+      'Cierra la tapa y cocina en modo alta presión por 30 minutos.',
+      'Deja liberar la presión naturalmente al terminar.',
+      'Sirve caliente. Lo que sobre es la cena.'
+    ]
+  },
+  {
+    key: 5, label: 'Tuesday', date: 'May 5',
+    name: 'Orange Chicken',
+    note: 'With rice',
+    ing: ['1 pechuga de pollo', '1 naranja (el jugo fresco)', '6 cucharadas de coconut aminos', '3/4 cucharadita de ajo en polvo', 'Pimienta al gusto', 'Hojuelas de chile (opcional)', 'Arroz cocido'],
+    steps: [
+      'Mezcla el jugo de naranja con los coconut aminos, ajo en polvo, pimienta y hojuelas de chile. Esa es tu marinada.',
+      'Marina la pechuga por lo menos 15 minutos (o toda la noche en la refri para más sabor).',
+      'Precalienta el horno a 200°C (400°F).',
+      'Coloca el pollo en un molde y vierte la marinada encima.',
+      'Cubre con papel aluminio los primeros 15 minutos. Destapa y hornea 8–10 minutos más hasta dorar.',
+      'Sirve sobre arroz y bañado con la salsa del molde.'
+    ]
+  }
+];
+
+function toggle(el) { el.classList.toggle('open'); }
+
+function makeRecipe(d) {
+  var ingHTML = d.ing.map(function(i){ return '<li>' + i + '</li>'; }).join('');
+  var stepsHTML = d.steps.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+  return '<div class="recipe-drawer"><div class="recipe-inner"><div class="rsec"><div class="rsec-label">Ingredients</div><ul class="ing-list">' + ingHTML + '</ul></div><div class="rsec"><div class="rsec-label">Preparation</div><ol class="steps-list">' + stepsHTML + '</ol></div></div></div>';
+}
+
+function render() {
+  var now = new Date();
+  var todayN = now.getMonth() === 4 ? now.getDate() : -1;
+  var tmrwN = todayN + 1;
+
+  var featured = DAYS.filter(function(d){ return d.key === todayN; })[0]
+    || DAYS.filter(function(d){ return d.key === tmrwN; })[0]
+    || DAYS[0];
+  var rest = DAYS.filter(function(d){ return d.key !== featured.key; });
+
+  function statusOf(key) {
+    if (key === todayN) return 'Today';
+    if (key === tmrwN) return 'Tomorrow';
+    return null;
+  }
+
+  var sl = statusOf(featured.key);
+  var badge = sl ? '<span class="f-badge">' + sl + '</span>' : '';
+  var chevronSVG = '<svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg>';
+
+  var featuredHTML = '<div class="featured-card" onclick="toggle(this)">'
+    + '<div class="featured-header"><div><div class="featured-day-name">' + featured.label + '</div><div class="featured-day-date">' + featured.date + '</div></div>' + badge + '</div>'
+    + '<div class="featured-body"><div class="featured-meal-name">' + featured.name + '</div><div class="featured-meal-note">' + featured.note + '</div>'
+    + '<div class="toggle-row"><div class="t-icon">' + chevronSVG + '</div><span>See recipe</span></div></div>'
+    + makeRecipe(featured) + '</div>';
+
+  var restHTML = '<div class="grid">' + rest.map(function(d) {
+    var s = statusOf(d.key);
+    var dbadge = s ? '<div class="d-badge">' + s + '</div>' : '';
+    return '<div class="day-card" onclick="toggle(this)">'
+      + '<div class="day-card-head"><div class="day-card-name">' + d.label + '</div><div class="day-card-date">' + d.date + '</div>' + dbadge + '</div>'
+      + '<div class="day-body"><div class="day-meal-name">' + d.name + '</div><div class="day-meal-note">' + d.note + '</div>'
+      + '<div class="d-toggle-row"><div class="dt-icon">' + chevronSVG + '</div><span>See recipe</span></div></div>'
+      + makeRecipe(d) + '</div>';
+  }).join('') + '</div>';
+
+  document.getElementById('root').innerHTML = featuredHTML + restHTML;
+
+  var sub = document.getElementById('sub');
+  if (todayN >= 2 && todayN <= 5) sub.textContent = 'Today highlighted above · tap to see the recipe';
+  else if (tmrwN >= 2 && tmrwN <= 5) sub.textContent = 'Starts tomorrow · tap to see the recipe';
+}
+
+render();
+</script>
+</body>
+</html>
