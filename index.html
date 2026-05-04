@@ -111,7 +111,6 @@ body {
   letter-spacing: 0.12em; text-transform: uppercase;
   color: #8B6040; margin-bottom: 9px;
 }
-.day-card .rsec-label { color: #8B6040; }
 .ing-list { list-style: none; }
 .ing-list li { font-size: 14px; color: #A07828; padding: 3px 0 3px 15px; position: relative; line-height: 1.5; }
 .day-card .ing-list li { color: #A07828; }
@@ -144,7 +143,7 @@ body {
 
 <div class="header">
   <h1>Lunch This Week</h1>
-  <p id="sub">May 2 – 5 &nbsp;·&nbsp; Tap to see the recipe</p>
+  <p id="sub">May 4 – 7 &nbsp;·&nbsp; Tap to see the recipe</p>
 </div>
 
 <div id="root"></div>
@@ -153,57 +152,85 @@ body {
 <script>
 var DAYS = [
   {
-    key: 2, label: 'Saturday', date: 'May 2',
-    name: 'Sautéed Steak & Vegetables',
-    note: 'Lomo saltado style · air fryer',
-    ing: ['180g de bistec de falda', '1 cebolla, en rodajas', '1 tomate', 'Ajo en polvo', 'Coconut aminos o salsa de soya'],
-    steps: [
-      'Corta el bistec en tiras y sazónalo con ajo en polvo y coconut aminos. Deja marinar 15 minutos.',
-      'Precalienta la freidora de aire a 200°C (400°F).',
-      'Cocina el bistec 6–8 minutos, agitando a la mitad.',
-      'Agrega la cebolla en rodajas y el tomate picado. Cocina 3–4 minutos más.',
-      'Mezcla todo y sirve de inmediato.'
-    ]
-  },
-  {
-    key: 3, label: 'Sunday', date: 'May 3',
-    name: 'Crispy Chicken with Mushrooms & Potatoes',
-    note: 'Oat-crusted · air fryer',
-    ing: ['1 pechuga de pollo', '1 huevo batido', 'Avena (para empanizar)', 'Ajo en polvo', 'Champiñones', '3/4 taza de papas en trozos', 'Romero', 'Aceite de oliva en spray'],
-    steps: [
-      'Mezcla la avena con ajo en polvo, sal y pimienta en un plato.',
-      'Pasa la pechuga por el huevo batido y luego cúbrela bien con la mezcla de avena.',
-      'Cocina en freidora de aire a 190°C (375°F) por 12–15 minutos, voltea a la mitad. La temperatura interna debe llegar a 74°C.',
-      'En otra tanda, coloca los champiñones y las papas con aceite de oliva en spray y romero. Cocina 15 minutos a 190°C.',
-      'Sirve el pollo junto a los champiñones y las papas.'
-    ]
-  },
-  {
     key: 4, label: 'Monday', date: 'May 4',
-    name: 'Instant Pot Beef Stew',
-    note: 'Flank steak + potatoes · 30 min pressure',
-    ing: ['Bistec de falda en cubos grandes', '1 cebolla en rodajas gruesas', '1 tomate pelado y picado', 'Papas en trozos', 'Pimentón en polvo', 'Sal y pimienta', '2 tazas de agua'],
+    name: 'Orange Chicken',
+    note: 'With rice · oven',
+    ing: [
+      '1 pechuga de pollo',
+      'Jugo de 1 naranja',
+      '6 cdas de coconut aminos',
+      '3/4 cdta de ajo en polvo',
+      'Pimienta al gusto',
+      'Hojuelas de chile (opcional)',
+      'Arroz cocido'
+    ],
     steps: [
-      'Corta el bistec en cubos grandes y sazónalo con pimentón, sal y pimienta.',
-      'Coloca en el Instant Pot en capas: primero la cebolla, luego el tomate picado sin piel ni semillas, después la carne y las papas al final.',
-      'Agrega 2 tazas de agua. No revuelvas.',
-      'Cierra la tapa y cocina en modo alta presión por 30 minutos.',
-      'Deja liberar la presión naturalmente al terminar.',
-      'Sirve caliente. Lo que sobre es la cena.'
+      'Mezcla el jugo de naranja con los coconut aminos, ajo en polvo, pimienta y hojuelas de chile. Esa es la marinada.',
+      'Marina la pechuga por lo menos 15 minutos (o toda la noche en la refri para más sabor).',
+      'Precalienta el horno a 200°C (400°F).',
+      'Coloca el pollo en un molde y vierte la marinada encima. Cubre con papel aluminio los primeros 15 minutos.',
+      'Destapa y hornea 8–10 minutos más hasta dorar. Opcional: gratina 2–3 minutos al final.',
+      'Sirve sobre arroz bañado con la salsa del molde.'
     ]
   },
   {
     key: 5, label: 'Tuesday', date: 'May 5',
-    name: 'Orange Chicken',
-    note: 'With rice',
-    ing: ['1 pechuga de pollo', '1 naranja (el jugo fresco)', '6 cucharadas de coconut aminos', '3/4 cucharadita de ajo en polvo', 'Pimienta al gusto', 'Hojuelas de chile (opcional)', 'Arroz cocido'],
+    name: 'Crispy Chicken with Mushrooms & Potatoes',
+    note: 'Oat-crusted · air fryer',
+    ing: [
+      '1 pechuga de pollo',
+      '1 huevo batido',
+      'Avena (para empanizar)',
+      'Ajo en polvo, sal y pimienta',
+      'Champiñones',
+      '3/4 taza de papas en trozos',
+      'Romero',
+      'Aceite de oliva en spray'
+    ],
     steps: [
-      'Mezcla el jugo de naranja con los coconut aminos, ajo en polvo, pimienta y hojuelas de chile. Esa es tu marinada.',
-      'Marina la pechuga por lo menos 15 minutos (o toda la noche en la refri para más sabor).',
-      'Precalienta el horno a 200°C (400°F).',
-      'Coloca el pollo en un molde y vierte la marinada encima.',
-      'Cubre con papel aluminio los primeros 15 minutos. Destapa y hornea 8–10 minutos más hasta dorar.',
-      'Sirve sobre arroz y bañado con la salsa del molde.'
+      'Mezcla el huevo con la avena, sal, pimienta y ajo en polvo en un plato.',
+      'Pasa la pechuga por la mezcla y cúbrela bien.',
+      'Cocina en freidora de aire a 190°C (375°F) por 12–15 minutos, voltea a la mitad. La temperatura interna debe llegar a 74°C.',
+      'Aparte, coloca los champiñones y las papas con aceite en spray, romero y ajo en polvo. Cocina a 190°C por 15 minutos.',
+      'Aderezo de yogurt opcional: 2 cdas de yogurt, limón, ajo en polvo, mostaza, sal y pimienta.'
+    ]
+  },
+  {
+    key: 6, label: 'Wednesday', date: 'May 6',
+    name: 'Instant Pot Stew',
+    note: 'Flank steak + potatoes · 30 min pressure',
+    ing: [
+      'Bistec de falda en cubos grandes',
+      '1 cebolla en rodajas gruesas',
+      '1 tomate pelado y picado en cubitos (sin semillas)',
+      'Papas en trozos',
+      'Pimentón en polvo, sal y pimienta',
+      '2 tazas de agua'
+    ],
+    steps: [
+      'Corta la carne en cubos grandes y sazónala con pimentón, sal y pimienta.',
+      'En el Instant Pot: primera capa de cebolla en rodajas, luego el tomate picado, después la carne y al final las papas.',
+      'Agrega 2 tazas de agua. No revuelvas.',
+      'Cierra la tapa y cocina en alta presión por 30 minutos.',
+      'Deja liberar la presión naturalmente al terminar.'
+    ]
+  },
+  {
+    key: 7, label: 'Thursday', date: 'May 7',
+    name: 'Steak and Veggies',
+    note: 'Lomo saltado style · air fryer',
+    ing: [
+      '180g de bistec de falda',
+      '1 cebolla en rodajas',
+      '1 tomate',
+      'Ajo en polvo',
+      'Coconut aminos o salsa de soya'
+    ],
+    steps: [
+      'Corta el bistec en tiras y sazónalo con ajo en polvo y coconut aminos. Marina por lo menos 15 minutos.',
+      'Cocina en freidora de aire a 200°C (400°F) por 6–8 minutos, agitando a la mitad.',
+      'Agrega la cebolla en rodajas y el tomate. Cocina a 190°C (380°F) por 3–4 minutos más.',
+      'Mezcla todo y sirve de inmediato.'
     ]
   }
 ];
@@ -255,8 +282,8 @@ function render() {
   document.getElementById('root').innerHTML = featuredHTML + restHTML;
 
   var sub = document.getElementById('sub');
-  if (todayN >= 2 && todayN <= 5) sub.textContent = 'Today highlighted above · tap to see the recipe';
-  else if (tmrwN >= 2 && tmrwN <= 5) sub.textContent = 'Starts tomorrow · tap to see the recipe';
+  if (todayN >= 4 && todayN <= 7) sub.textContent = 'Today highlighted above · tap to see the recipe';
+  else if (tmrwN >= 4 && tmrwN <= 7) sub.textContent = 'Starts tomorrow · tap to see the recipe';
 }
 
 render();
